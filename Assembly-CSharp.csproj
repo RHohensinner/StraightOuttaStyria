@@ -53,10 +53,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\PlayerScript.cs" />
      <Compile Include="Assets\Scripts\CameraScript.cs" />
+     <Compile Include="Assets\Scripts\CharacterScript.cs" />
      <Compile Include="Assets\Scripts\MenuScript.cs" />
-     <Compile Include="Assets\Scripts\MoveScript.cs" />
      <None Include="Assets\Taiga-Asset-Pack\Readme.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/Richard/StraightOuttaStyria/StraightOuttaStyria/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
