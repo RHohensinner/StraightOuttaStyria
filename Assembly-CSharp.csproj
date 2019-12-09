@@ -55,6 +55,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CameraScript.cs" />
      <Compile Include="Assets\Scripts\CharacterScript.cs" />
+     <Compile Include="Assets\Scripts\ItemScript.cs" />
      <Compile Include="Assets\Scripts\MenuScript.cs" />
      <None Include="Assets\Taiga-Asset-Pack\Readme.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">

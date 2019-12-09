@@ -10,15 +10,24 @@ public class CharacterScript : MonoBehaviour
     public LayerMask whatIsGround;
     public Transform groundCheck;
     public bool isGrounded;
+    public bool firePickedUp;
+    public bool fireActive;
+    public bool potionPickedUp;
+    public bool potionActive;
+    public bool shieldPickedUp;
+    public bool shieldActive;
     public float jumpForce;
     public float speed;
     Rigidbody2D rb;
     public float distToGround;
+    public int health;
+    public int maxHealth;
 
     void Start ()
     {
         rb = GetComponent <Rigidbody2D> ();
         distToGround = rb.position.y;
+        health = maxHealth;
     }
  
     //bool IsPlayerGrounded()
@@ -62,6 +71,28 @@ public class CharacterScript : MonoBehaviour
         if (theCollision.gameObject.layer == 8)
         {
             isGrounded = true;
+        }
+
+        if (theCollision.gameObject.layer == 11)
+        {
+            // fire item
+            Debug.Log("Fire picked up!");
+            firePickedUp = true;
+            fireActive = true;
+        }
+        if (theCollision.gameObject.layer == 12)
+        {
+            // potion item
+            Debug.Log("Potion picked up!");
+            potionPickedUp = true;
+            potionActive = true;
+        }
+        if (theCollision.gameObject.layer == 13)
+        {
+            // shield item
+            Debug.Log("Shield picked up!");
+            shieldPickedUp = true;
+            shieldActive = true;
         }
     }
 
