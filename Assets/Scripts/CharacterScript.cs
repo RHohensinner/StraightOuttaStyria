@@ -22,12 +22,17 @@ public class CharacterScript : MonoBehaviour
     public float distToGround;
     public int health;
     public int maxHealth;
+    public int shieldDamageCounter;
+    public int shieldExpirationCounter;
+    public int fireCounter;
 
     void Start ()
     {
         rb = GetComponent <Rigidbody2D> ();
         distToGround = rb.position.y;
         health = maxHealth;
+
+        InvokeRepeating("UpdateShieldExpiration", 1f, 1f);
     }
  
     //bool IsPlayerGrounded()
@@ -46,6 +51,29 @@ public class CharacterScript : MonoBehaviour
         if(y < -3)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        if(Input.GetButtonDown("Potion") && potionPickedUp)
+        {
+            Debug.Log("Potion used!");
+            health = maxHealth;
+            potionPickedUp = false;
+        }
+
+        if(Input.GetButtonDown("Shield") && shieldPickedUp)
+        {
+            Debug.Log("Shield used!");
+            shieldActive = true;
+            shieldDamageCounter = 3;
+            shieldExpirationCounter = 10;
+            shieldPickedUp = false;
+        }
+
+        if(shieldActive && shieldExpirationCounter == 0)
+        {
+            Debug.Log("Shield expired!");
+            shieldActive = false;
+            shieldDamageCounter = 0;
         }
     }
  
@@ -78,22 +106,29 @@ public class CharacterScript : MonoBehaviour
             // fire item
             Debug.Log("Fire picked up!");
             firePickedUp = true;
-            fireActive = true;
+            //fireActive = true;
+            fireCounter = 5;
         }
         if (theCollision.gameObject.layer == 12)
         {
             // potion item
             Debug.Log("Potion picked up!");
             potionPickedUp = true;
-            potionActive = true;
+            //potionActive = true;
         }
         if (theCollision.gameObject.layer == 13)
         {
             // shield item
             Debug.Log("Shield picked up!");
             shieldPickedUp = true;
-            shieldActive = true;
+            //shieldActive = true;
         }
+    }
+
+    void UpdateShieldExpiration()
+    {
+        if (shieldActive)
+            shieldExpirationCounter--;
     }
 
 }

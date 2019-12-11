@@ -22,12 +22,12 @@ public class ItemScript : MonoBehaviour
     	if(player.potionActive)
     	{
     		//handle player potion
-    		player.health = player.maxHealth;
-    		player.potionActive = false;
+    		//player.health = player.maxHealth;
+    		//player.potionActive = false;
     	}
     	if(player.shieldActive)
     	{
-    		//handle player shield
+            //handle player shield
     	}
         
     }
@@ -37,19 +37,19 @@ public class ItemScript : MonoBehaviour
     	if(player.firePickedUp)
     	{
     		Debug.Log("Destroy Fire");
-    		player.firePickedUp = false;
+    		//player.firePickedUp = false;
     		Destroy(this.gameObject);
     	}
     	if(player.potionPickedUp)
     	{
     		Debug.Log("Destroy Potion");
-    		player.potionPickedUp = false;
+    		//player.potionPickedUp = false;
     		Destroy(this.gameObject);
     	}
     	if(player.shieldPickedUp)
     	{
     		Debug.Log("Destroy Shield");
-    		player.shieldPickedUp = false;
+    		//player.shieldPickedUp = false;
     		Destroy(this.gameObject);
     	}
     }
