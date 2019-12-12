@@ -79,13 +79,19 @@ public class CharacterScript : MonoBehaviour
  
     void FixedUpdate ()
     {
-        //if(isPlayerGrounded())
-        //{
-        //    isGrounded = true;
-        //}
-
         //isGrounded = Physics2D.OverlapPoint(groundCheck.position, whatIsGround);
-        //Debug.Log("HELLO");
+        if(Input.GetButtonDown("Left"))
+        {
+            //Debug.Log("Turning left!");
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        }
+
+        if(Input.GetButtonDown("Right"))
+        {
+            //Debug.Log("Turning right!");
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        }
+
         float x = Input.GetAxis ("Horizontal");
         Vector3 move = new Vector3 (x * speed, rb.velocity.y, 0f);
         rb.velocity = move;
