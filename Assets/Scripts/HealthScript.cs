@@ -7,12 +7,34 @@ public class HealthScript : MonoBehaviour
 {
 	
 	public int hp = 1; // enemy base hp
+    public int maxHealth = 3;
 
 	public bool isEnemy = true;
 
-	public void Damage(int damageCount)
+    public void Damage(int damageCount)
 	{
-		hp -= damageCount;
+        CharacterScript character = GetComponent<CharacterScript>();
+        EnemyScript enemy = GetComponent<EnemyScript>();
+        if(character != null)
+        {
+            if(character.shieldActive)
+            {
+                character.shieldDamageCounter--;
+                if(character.shieldDamageCounter <= 0)
+                {
+                    character.shieldActive = false;
+                }
+            }
+            else
+            {
+                hp -= damageCount;
+            }
+        }
+        else if(enemy != null)
+        {
+            hp -= damageCount;
+        }
+		
 
 		if (hp <= 0)
 		{

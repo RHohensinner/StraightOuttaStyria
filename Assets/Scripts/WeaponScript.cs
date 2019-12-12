@@ -11,6 +11,7 @@ public class WeaponScript : MonoBehaviour
 
 	public float shoot_rate = 0.15f;
 	public float shoot_cd;
+    public int laserDmg = 1;
 
 	void Start()
 	{
@@ -76,11 +77,22 @@ public class WeaponScript : MonoBehaviour
         if(hitInfo)
         {
             Debug.Log(hitInfo.transform.name);
-            /*Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
-            if(enemy != null)
+            EnemyScript enemy = hitInfo.transform.GetComponent<EnemyScript>();
+            ShotScript shot = hitInfo.transform.GetComponent<ShotScript>();
+            if (enemy != null)
             {
-                //implement damage behaviour
-            }*/
+                
+                HealthScript health = hitInfo.transform.GetComponent<HealthScript>();
+                if(health != null)
+                {
+                    Debug.Log("DIE!!!!");
+                    health.Damage(laserDmg);
+                }
+            }
+            else if(shot != null)
+            {
+                Destroy(shot.gameObject);
+            }
 
             lineRenderer.SetPosition(0, firePoint.position);
             lineRenderer.SetPosition(1, hitInfo.point);

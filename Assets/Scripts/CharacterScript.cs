@@ -20,8 +20,7 @@ public class CharacterScript : MonoBehaviour
     public float speed;
     Rigidbody2D rb;
     public float distToGround;
-    public int health;
-    public int maxHealth;
+
     public int shieldDamageCounter;
     public int shieldExpirationCounter;
     public int fireCounter;
@@ -30,7 +29,6 @@ public class CharacterScript : MonoBehaviour
     {
         rb = GetComponent <Rigidbody2D> ();
         distToGround = rb.position.y;
-        health = maxHealth;
 
         InvokeRepeating("UpdateShieldExpiration", 1f, 1f);
     }
@@ -56,7 +54,12 @@ public class CharacterScript : MonoBehaviour
         if(Input.GetButtonDown("Potion") && potionPickedUp)
         {
             Debug.Log("Potion used!");
-            health = maxHealth;
+            HealthScript health = GetComponent<HealthScript>();
+            if(health != null)
+            {
+                health.hp = health.maxHealth;
+            }
+            
             potionPickedUp = false;
         }
 
