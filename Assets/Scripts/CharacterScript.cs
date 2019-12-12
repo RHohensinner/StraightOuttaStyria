@@ -48,7 +48,9 @@ public class CharacterScript : MonoBehaviour
 
         if(y < -3)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Debug.Log("Player died.");
+            FindObjectOfType<GameOverScript>().ShowButtons();
+            Destroy(gameObject);
         }
 
         if(Input.GetButtonDown("Potion") && potionPickedUp)
