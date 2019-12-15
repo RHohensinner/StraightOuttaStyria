@@ -48,7 +48,7 @@ public class CharacterScript : MonoBehaviour
 
         if(y < -3)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Destroy(gameObject);
         }
 
         if(Input.GetButtonDown("Potion") && potionPickedUp)
@@ -139,5 +139,4 @@ public class CharacterScript : MonoBehaviour
         if (shieldActive)
             shieldExpirationCounter--;
     }
-
 }
