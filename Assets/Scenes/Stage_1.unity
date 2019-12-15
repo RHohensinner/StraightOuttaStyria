@@ -1116,7 +1116,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Quit
 --- !u!222 &115244818
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1493,7 +1493,7 @@ PrefabInstance:
     - target: {fileID: 4665199810966138476, guid: 87fe29a31cc4e4147b70828602732d15,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4665199810966138472, guid: 87fe29a31cc4e4147b70828602732d15,
         type: 3}
@@ -3413,7 +3413,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Menu
 --- !u!222 &477618198
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3567,7 +3567,7 @@ PrefabInstance:
     - target: {fileID: 4665199810966138476, guid: 87fe29a31cc4e4147b70828602732d15,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4665199810966138472, guid: 87fe29a31cc4e4147b70828602732d15,
         type: 3}
@@ -4206,7 +4206,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Restart
 --- !u!222 &684141679
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12048,7 +12048,7 @@ PrefabInstance:
     - target: {fileID: 4665199810966138476, guid: 87fe29a31cc4e4147b70828602732d15,
         type: 3}
       propertyPath: m_Layer
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4665199810966138472, guid: 87fe29a31cc4e4147b70828602732d15,
         type: 3}
