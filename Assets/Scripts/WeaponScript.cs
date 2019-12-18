@@ -13,6 +13,8 @@ public class WeaponScript : MonoBehaviour
 	public float shoot_cd;
     public int laserDmg = 1;
 
+    private AudioSource audio_laser;
+
 	void Start()
 	{
 		shoot_cd = 0f;
@@ -72,6 +74,8 @@ public class WeaponScript : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        audio_laser = GetComponent<AudioSource>();
+        audio_laser.Play();
         RaycastHit2D hitInfo =  Physics2D.Raycast(firePoint.position, firePoint.right);
 
         if(hitInfo)

@@ -60,5 +60,16 @@ public class HealthScript : MonoBehaviour
 				Destroy(shot.gameObject); // shot gets yeeted
 			}
 		}
+
+        
 	}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();
+        if (enemy != null)
+        {
+            Damage(1);
+            Destroy(enemy.gameObject);
+        }
+    }
 }

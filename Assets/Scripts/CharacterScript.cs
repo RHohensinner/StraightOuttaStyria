@@ -25,6 +25,9 @@ public class CharacterScript : MonoBehaviour
     public int shieldExpirationCounter;
     public int fireCounter;
 
+    private AudioSource audio;
+    public AudioClip audio_jump;
+
     void Start ()
     {
         rb = GetComponent <Rigidbody2D> ();
@@ -42,6 +45,8 @@ public class CharacterScript : MonoBehaviour
         if (Input.GetButtonDown ("Jump") && isGrounded) {
             rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
+            audio = GetComponent<AudioSource>();
+            audio.PlayOneShot(audio_jump);
         }
 
         float y = rb.position.y;
