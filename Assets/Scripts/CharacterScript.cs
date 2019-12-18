@@ -63,6 +63,7 @@ public class CharacterScript : MonoBehaviour
             if(health != null)
             {
                 health.hp = health.maxHealth;
+                health.healthBar.SetSize(1f);
             }
             
             potionPickedUp = false;

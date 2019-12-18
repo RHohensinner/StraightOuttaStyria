@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class HealthScript : MonoBehaviour
 {
-	
+    [SerializeField] public HealthbarScript healthBar = null;
+
 	public int hp = 1; // enemy base hp
     public int maxHealth = 3;
 
@@ -28,6 +29,7 @@ public class HealthScript : MonoBehaviour
             else
             {
                 hp -= damageCount;
+                healthBar.SetSize((float)hp / maxHealth);
             }
         }
         else if(enemy != null)
