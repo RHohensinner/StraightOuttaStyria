@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpikeScript : MonoBehaviour
 {
-	public GameObject player;
+	//public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -20,12 +20,13 @@ public class SpikeScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D theCollision)
     {
+        GameObject player = GameObject.Find("Player");
         //Debug.Log(theCollision.gameObject.name);
         if (theCollision.gameObject.layer == 10)
         {
             if (player != null)
             {
-            	Destroy(player);
+                Destroy(player.gameObject);
         	}
         }
     }

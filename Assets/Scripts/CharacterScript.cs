@@ -9,6 +9,7 @@ public class CharacterScript : MonoBehaviour
  
     public LayerMask whatIsGround;
     public Transform groundCheck;
+    public bool balloon;
     public bool isGrounded;
     public bool onWall;
     public bool firePickedUp;
@@ -58,19 +59,20 @@ public class CharacterScript : MonoBehaviour
  
     void Update () {
 
-        if (Input.GetButtonDown ("Jump") && isGrounded) {
+        if (Input.GetButtonDown ("Jump") && isGrounded && !balloon) {
             rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
             audio = GetComponent<AudioSource>();
             audio.PlayOneShot(audio_jump);
         }
-        else if (Input.GetButtonDown("Jump") && onWall)
+        else if (Input.GetButtonDown("Jump") && onWall && !balloon)
         {
             Vector2 forceToAdd = new Vector2(wallJumpForce * wallJumpDirection.x * movementDirection, wallJumpForce * wallJumpDirection.y);
             rb.AddForce(forceToAdd, ForceMode2D.Impulse);
         }
         
-
+        
+        
         float y = rb.position.y;
 
         if (rb.velocity.y < 0)
@@ -139,15 +141,29 @@ public class CharacterScript : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
 
-        if(Input.GetButtonDown("Right"))
+        if (Input.GetButtonDown("Right"))
         {
             //Debug.Log("Turning right!");
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
-        movementDirection = Input.GetAxis ("Horizontal");
-        Vector3 move = new Vector3 (movementDirection * speed, rb.velocity.y, 0f);
-        rb.velocity = move;
+        if (balloon && Input.GetButton("Vertical"))
+        {
+            movementDirection = Input.GetAxis("Horizontal");
+            float movementDirectionY = Input.GetAxis("Vertical");
+            Vector3 move = new Vector3(movementDirection * speed, movementDirectionY * speed, 0f);
+            rb.velocity = move;
+        }
+        else
+        {
+            movementDirection = Input.GetAxis("Horizontal");
+            Vector3 move = new Vector3(movementDirection * speed, rb.velocity.y, 0f);
+            rb.velocity = move;
+        }
+
+        
+
+        
     }
 
     //make sure u replace "floor" with your gameobject name.on which player is standing
@@ -155,12 +171,12 @@ public class CharacterScript : MonoBehaviour
     {
         //Debug.Log(theCollision.gameObject.name);
         LayerMask ground = LayerMask.GetMask("Ground");
-        if (theCollision.gameObject.layer == 8)
+        if (theCollision.gameObject.layer == 8 && !balloon)
         {
             isGrounded = true;
         }
 
-        if(theCollision.gameObject.layer == 9)
+        if(theCollision.gameObject.layer == 9 && !balloon)
         {
             onWall = true;
         }
@@ -191,7 +207,7 @@ public class CharacterScript : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D theCollision)
     {
-        if(theCollision.gameObject.layer == 9)
+        if(theCollision.gameObject.layer == 9 && !balloon)
         {
             onWall = false;
         }
