@@ -10,6 +10,7 @@ public class CharacterScript : MonoBehaviour
     public LayerMask whatIsGround;
     public Transform groundCheck;
     public bool isGrounded;
+    public bool onWall;
     public bool firePickedUp;
     public bool fireActive;
     public bool potionPickedUp;
@@ -28,12 +29,26 @@ public class CharacterScript : MonoBehaviour
     private AudioSource audio;
     public AudioClip audio_jump;
 
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
+    public float wallJumpForce;
+
+    private float slideSpeed = 3f;
+    private float climbSpeed = 5f;
+
+    private float movementDirection;
+
+    private bool wallGrab = false;
+
+    public Vector2 wallJumpDirection;
+
     void Start ()
     {
         rb = GetComponent <Rigidbody2D> ();
         distToGround = rb.position.y;
 
         InvokeRepeating("UpdateShieldExpiration", 1f, 1f);
+        wallJumpDirection.Normalize();
     }
  
     //bool IsPlayerGrounded()
@@ -42,16 +57,45 @@ public class CharacterScript : MonoBehaviour
     //}
  
     void Update () {
+
         if (Input.GetButtonDown ("Jump") && isGrounded) {
             rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
             isGrounded = false;
             audio = GetComponent<AudioSource>();
             audio.PlayOneShot(audio_jump);
         }
+        else if (Input.GetButtonDown("Jump") && onWall)
+        {
+            Vector2 forceToAdd = new Vector2(wallJumpForce * wallJumpDirection.x * movementDirection, wallJumpForce * wallJumpDirection.y);
+            rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+        }
+        
 
         float y = rb.position.y;
 
-        if(y < -3)
+        if (rb.velocity.y < 0)
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+        }
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+        }
+
+        wallGrab = onWall && Input.GetKey(KeyCode.LeftShift);
+
+        if (wallGrab && !isGrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, climbSpeed);
+        }
+
+        if (onWall && !isGrounded)
+        {
+            if(!wallGrab)
+                WallSlide();
+        }
+
+        if (y < -3)
         {
             Destroy(gameObject);
         }
@@ -101,8 +145,8 @@ public class CharacterScript : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
 
-        float x = Input.GetAxis ("Horizontal");
-        Vector3 move = new Vector3 (x * speed, rb.velocity.y, 0f);
+        movementDirection = Input.GetAxis ("Horizontal");
+        Vector3 move = new Vector3 (movementDirection * speed, rb.velocity.y, 0f);
         rb.velocity = move;
     }
 
@@ -114,6 +158,11 @@ public class CharacterScript : MonoBehaviour
         if (theCollision.gameObject.layer == 8)
         {
             isGrounded = true;
+        }
+
+        if(theCollision.gameObject.layer == 9)
+        {
+            onWall = true;
         }
 
         if (theCollision.gameObject.layer == 11)
@@ -140,9 +189,22 @@ public class CharacterScript : MonoBehaviour
         }
     }
 
+    void OnCollisionExit2D(Collision2D theCollision)
+    {
+        if(theCollision.gameObject.layer == 9)
+        {
+            onWall = false;
+        }
+    }
+
     void UpdateShieldExpiration()
     {
         if (shieldActive)
             shieldExpirationCounter--;
+    }
+
+    private void WallSlide()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, -slideSpeed);
     }
 }
