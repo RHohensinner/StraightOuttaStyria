@@ -11,6 +11,6 @@ public class ShotScript : MonoBehaviour
 
 	void Start()
 	{
-		Destroy(gameObject, 5);
+		Destroy(gameObject, 3);
 	}
 }

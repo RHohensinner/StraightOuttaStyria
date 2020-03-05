@@ -22,6 +22,7 @@ public class CharacterScript : MonoBehaviour
     public float speed;
     Rigidbody2D rb;
     public float distToGround;
+    public int imagesCollected = 0;
 
     public int shieldDamageCounter;
     public int shieldExpirationCounter;

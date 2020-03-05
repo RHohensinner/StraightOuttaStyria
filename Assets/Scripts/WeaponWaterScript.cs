@@ -9,7 +9,7 @@ public class WeaponWaterScript : MonoBehaviour
     public CharacterWaterScript player;
     public LineRenderer lineRenderer;
 
-	public float shoot_rate = 0.01f;
+	public float shoot_rate = 0.15f;
 	public float shoot_cd;
     public int laserDmg = 1;
 
@@ -81,12 +81,12 @@ public class WeaponWaterScript : MonoBehaviour
         if(hitInfo)
         {
             Debug.Log(hitInfo.transform.name);
-            EnemyScript enemy = hitInfo.transform.GetComponent<EnemyScript>();
+            EnemyWaterScript enemy = hitInfo.transform.GetComponent<EnemyWaterScript>();
             ShotScript shot = hitInfo.transform.GetComponent<ShotScript>();
             if (enemy != null)
             {
                 
-                HealthScript health = hitInfo.transform.GetComponent<HealthScript>();
+                HealthWaterScript health = hitInfo.transform.GetComponent<HealthWaterScript>();
                 if(health != null)
                 {
                     Debug.Log("DIE!!!!");

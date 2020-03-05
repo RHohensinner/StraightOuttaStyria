@@ -20,6 +20,7 @@ public class CharacterWaterScript : MonoBehaviour
     public float speed;
     Rigidbody2D rb;
     public float distToGround;
+    public int imagesCollected = 0;
 
     public int shieldDamageCounter;
     public int shieldExpirationCounter;
@@ -59,7 +60,7 @@ public class CharacterWaterScript : MonoBehaviour
         if(Input.GetButtonDown("Potion") && potionPickedUp)
         {
             Debug.Log("Potion used!");
-            HealthScript health = GetComponent<HealthScript>();
+            HealthWaterScript health = GetComponent<HealthWaterScript>();
             if(health != null)
             {
                 health.hp = health.maxHealth;
@@ -143,17 +144,6 @@ public class CharacterWaterScript : MonoBehaviour
         	Debug.Log("inside Water!");
         }
     }
-
-	void OnTriggerEnter2D(Collider2D other) 
-	{
-		//Debug.Log("inside Water!");
-		//isGrounded = true;
-	}
-
-	void OnTriggerExit2D(Collider2D other) 
-	{
-		//Debug.Log("outside Water!");
-	}
 
 	void OnTriggerStay2D(Collider2D other) 
 	{

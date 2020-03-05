@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOverScript : MonoBehaviour
 {
@@ -42,6 +43,14 @@ public class GameOverScript : MonoBehaviour
         // Reload the level
         Debug.Log("Reset Button clicked");
         Application.LoadLevel("Stage_1");
+    }
+
+    public void RetryLevel()
+    {
+        // Reload the level
+        Debug.Log("Retry Button clicked");
+        int scene = SceneManager.GetActiveScene().buildIndex;
+        Application.LoadLevel(scene);
     }
 
     public void QuitGame()
