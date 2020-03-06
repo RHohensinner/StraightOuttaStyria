@@ -33,8 +33,10 @@ public class GameOverScript : MonoBehaviour
 
     public void ExitToMenu()
     {
-        // Reload the level
-        Debug.Log("Menu Button clicked");
+		// Reload the level
+		ScoreScript1.scoreValue = 0;
+		ScoreScript2.scoreValue = ScoreScript2.initial_score;
+		Debug.Log("Menu Button clicked");
         Application.LoadLevel("MainMenu");
     }
 
@@ -42,14 +44,18 @@ public class GameOverScript : MonoBehaviour
     {
         // Reload the level
         Debug.Log("Reset Button clicked");
-        Application.LoadLevel("Stage_1");
+		ScoreScript1.scoreValue = 0;
+		ScoreScript2.scoreValue = ScoreScript2.initial_score;
+		Application.LoadLevel("Stage_1");
     }
 
     public void RetryLevel()
     {
         // Reload the level
         Debug.Log("Retry Button clicked");
-        int scene = SceneManager.GetActiveScene().buildIndex;
+		ScoreScript1.scoreValue = 0;
+		ScoreScript2.scoreValue = ScoreScript2.initial_score;
+		int scene = SceneManager.GetActiveScene().buildIndex;
         Application.LoadLevel(scene);
     }
 
@@ -57,6 +63,8 @@ public class GameOverScript : MonoBehaviour
     {
         // Reload the level
         Debug.Log("Quit Button clicked");
-        Application.Quit();
+		ScoreScript1.scoreValue = 0;
+		ScoreScript2.scoreValue = ScoreScript2.initial_score;
+		Application.Quit();
     }
 }

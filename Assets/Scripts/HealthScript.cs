@@ -46,6 +46,7 @@ public class HealthScript : MonoBehaviour
 
 			// Yeet!
 			Destroy(gameObject);
+			if(enemy) ScoreScript1.scoreValue += 10;
 		}
 	}
 
@@ -72,6 +73,7 @@ public class HealthScript : MonoBehaviour
         {
             Damage(1);
             Destroy(enemy.gameObject);
-        }
+			ScoreScript1.scoreValue += 10;
+		}
     }
 }
